@@ -30,7 +30,7 @@
         </div>
         <div class="form-group col-md-3">  
           <label for="inputDepartment">Department</label>
-            <select name="DepartmentS" class="form-control" id="createMatterFormControlSelect3">
+            <select name='{{caseDepartmentListName}}' class="form-control" id="createMatterFormControlSelect3">
               {{#each caseDepartmentOption}}
               <option value='{{this.fields.departmentid}}'>{{this.fields.Title}}</option>
               {{/each}}             
@@ -39,6 +39,7 @@
       </div>     
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    
   </div>
 <script>
 
@@ -52,7 +53,7 @@
       }
     }
     try {
-      const response = await axios.get(`http://localhost:3000/api/lists/items?list=DepartmentList&fName=branchid&fValue='${branchSelectValue}'`, config);
+      const response = await axios.get(`http://localhost:3000/api/lists/items?list={{{caseDepartmentListName}}}&fName=branchid&fValue='${branchSelectValue}'`, config);
       let resultHtml = '';
       for(let a of response.data){
         resultHtml +=`<option value='${a.fields.departmentid}'>${a.fields.Title}</option>`;

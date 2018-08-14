@@ -42,7 +42,8 @@ router.get('/createnew', async function (req, res, next) {
     response = await axios.get(`http://localhost:3000/api/lists/items?list=${process.env.CASE_CATEGORY_LIST_NAME}`, config);
     parms.caseCategoryOption = response.data;    
     response = await axios.get(`http://localhost:3000/api/lists/items?list=${process.env.CASE_DEPARTMENT_LIST_NAME}`, config);
-    parms.caseDepartmentOption = response.data;    
+    parms.caseDepartmentOption = response.data;
+    parms.caseDepartmentListName = process.env.CASE_DEPARTMENT_LIST_NAME;
 
   } catch (error) {
     console.error(error);
