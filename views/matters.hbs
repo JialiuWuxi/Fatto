@@ -53,7 +53,7 @@
       }
     }
     try {
-      const response = await axios.get(`http://localhost:3000/api/lists/items?list={{{caseDepartmentListName}}}&fName=branchid&fValue='${branchSelectValue}'`, config);
+      const response = await axios.get(`http://localhost:3000/api/lists/items?list={{{caseDepartmentListName}}}&fName={{{caseDepartmentListBranchidCoulunm}}}&fValue='${branchSelectValue}'`, config);
       let resultHtml = '';
       for(let a of response.data){
         resultHtml +=`<option value='${a.fields.departmentid}'>${a.fields.Title}</option>`;
