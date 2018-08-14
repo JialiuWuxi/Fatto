@@ -10,9 +10,9 @@ router.get('/items', async function(req, res, next){
     }else{
         accessToken = accessTokenArray[0];
     }
-    const tenantName = req.query.tenant;
-    const siteName = req.query.site;
     const listName = req.query.list;
+    const filterName = req.query.fName;
+    const filterValue = req.query.fValue;
 
     if(accessToken){
         const client = graph.Client.init({
@@ -22,9 +22,14 @@ router.get('/items', async function(req, res, next){
         });
 
         try{
+            //Get root name
+            const rootName = (await client
+            .api(`/sites/root`)
+            .get()).siteCollection.hostname;
+
             //Get the Site ID
             const siteID = (await client
-            .api(`/sites/${tenantName}.sharepoint.com:/sites/${siteName}`)
+            .api(`/sites/${rootName}:/sites/${process.env.SITE_NAME}`)
             .select('id')
             .get()).id
             
@@ -38,7 +43,19 @@ router.get('/items', async function(req, res, next){
             .api(`/sites/${siteID}/lists/${listID}/items`)
             .expand('fields')
             .get()).value
-            res.send(listItems);
+            if(filterName && filterValue){
+                let listItems = (await client
+                .api(`/sites/${siteID}/lists/${listID}/items`)
+                .filter(`fields/${filterName} eq ${filterValue}`)
+                .expand('fields')
+                .get()).value
+                res.send(listItems);
+
+            }else{
+                res.send(listItems);
+            }
+
+
         }catch(err){
             res.status('404').send(err.message);
         };
