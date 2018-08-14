@@ -20,7 +20,7 @@ router.get('/', async function (req, res, next) {
 });
 
 router.get('/createnew', async function (req, res, next) {
-  let parms = { title: 'Create new matter', active: { matters: true } };
+  let parms = { title: 'Create new matter', active: { matters: true }, createFormView: '1' };
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
 
@@ -28,13 +28,10 @@ router.get('/createnew', async function (req, res, next) {
     parms.user = userName;
   } else {
     parms.signInUrl = authHelper.getAuthUrl();
+    res.redirect('/');
   }
 
-  let config = {
-    headers: {
-      Authorization: accessToken,
-    }
-  }
+  let config = {headers: { Authorization: accessToken,}};
 
   try {
     let response = await axios.get(`http://localhost:3000/api/lists/items?list=${process.env.CASE_BRANCH_LIST_NAME}`, config);
@@ -49,9 +46,6 @@ router.get('/createnew', async function (req, res, next) {
   } catch (error) {
     console.error(error);
   }
-
   res.render('matters', parms);
 });
-
-
 module.exports = router;
