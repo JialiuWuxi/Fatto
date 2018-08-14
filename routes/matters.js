@@ -20,7 +20,7 @@ router.get('/', async function (req, res, next) {
 });
 
 router.get('/createnew', async function (req, res, next) {
-  let parms = { title: 'Create new matter', active: { matters: true }, createFormView: '1' };
+  let parms = { title: 'Fatto', active: { matters: true }, createFormView: '1' };
   const accessToken = await authHelper.getAccessToken(req.cookies, res);
   const userName = req.cookies.graph_user_name;
 

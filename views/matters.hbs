@@ -46,16 +46,11 @@
   </div>
 
   <script>
-
     $('#createMatterFormControlSelect2').change(async function() {
       const branchSelectValue = $(this).val();
       const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-      let config = {
-        headers: {
-          Authorization: accessToken,
-        }
-      }
+      let config = {headers: {Authorization: accessToken,}}
       try {
         const response = await axios.get(`http://localhost:3000/api/lists/items?list={{{caseDepartmentListName}}}&fName={{{caseDepartmentListBranchidCoulunm}}}&fValue='${branchSelectValue}'`, config);
         let resultHtml = '';
