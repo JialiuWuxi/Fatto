@@ -49,19 +49,27 @@ router.get('/items', async function(req, res, next){
                 .filter(`fields/${filterName} eq ${filterValue}`)
                 .expand('fields')
                 .get()).value
-                res.send(listItems);
-
+                res.send(JSON.stringify(listItems));
             }else{
-                res.send(listItems);
+                res.send(JSON.stringify(listItems));
             }
-
-
         }catch(err){
             res.status('404').send(err.message);
         };
     }else{
         res.status('401').send('Need Login');
     }
+});
+
+router.post('/items', async function(req, res, next) {
+    let accessToken = req.get('Authorization');
+    let accessTokenArray = accessToken.split(' ');
+    if(accessTokenArray[0] == 'Bearer'){
+        accessToken = accessTokenArray[1];
+    }else{
+        accessToken = accessTokenArray[0];
+    }
+
 });
 
 

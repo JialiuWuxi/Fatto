@@ -53,6 +53,7 @@
       let config = {headers: {Authorization: accessToken,}}
       try {
         const response = await axios.get(`http://localhost:3000/api/lists/items?list={{{caseDepartmentListName}}}&fName={{{caseDepartmentListBranchidCoulunm}}}&fValue='${branchSelectValue}'`, config);
+        //responseObject = JSON.parse(response.data);
         let resultHtml = '';
         for(let a of response.data){
           resultHtml +=`<option value='${a.fields.departmentid}'>${a.fields.Branch}-${a.fields.Title}</option>`;
@@ -63,5 +64,4 @@
       }
     });
   </script>
-
 </div>
