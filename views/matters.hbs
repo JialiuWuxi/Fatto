@@ -20,7 +20,8 @@
               </select>
             </div>
         </div>    
-        <div class="form-row">
+
+        <div class="form-row"> 
           <div class="form-group col-md-3">  
             <label for="inputBranch">Branch</label>
             <select name="BranchS" class="form-control" id="createMatterFormControlSelect2">
@@ -37,7 +38,21 @@
                 {{/each}}             
               </select>
           </div>
-        </div>     
+          <div class="form-group col-md-3">
+            <label for="example-datetime-local-input">Create Date</label>
+            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+          </div>
+
+        </div> 
+
+        <div calss="form-row">
+          <label for="inputCaseName">Case name</label>
+          <input class="form-control" type="text">
+        </div>
+
+
+      
+
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     {{else}}
@@ -49,7 +64,6 @@
     $('#createMatterFormControlSelect2').change(async function() {
       const branchSelectValue = $(this).val();
       const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-
       let config = {headers: {Authorization: accessToken,}}
       try {
         const response = await axios.get(`http://localhost:3000/api/lists/items?list={{{caseDepartmentListName}}}&fName={{{caseDepartmentListBranchidCoulunm}}}&fValue='${branchSelectValue}'`, config);
@@ -63,5 +77,6 @@
         console.log(error);
       }
     });
+
   </script>
 </div>
