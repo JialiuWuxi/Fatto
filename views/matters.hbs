@@ -34,34 +34,34 @@
             <label for="inputDepartment">Department</label>
               <select name='{{caseDepartmentListName}}' class="form-control" id="createMatterFormControlSelect3">
                 {{#each caseDepartmentOption}}
-                <option value='{{this.fields.departmentid}}'>{{this.fields.Branch}}-{{this.fields.Title}}</option>
+                {{!-- <option value='{{this.fields.departmentid}}'>{{this.fields.Branch}}-{{this.fields.Title}}</option> --}}
                 {{/each}}             
               </select>
           </div>
           <div class="form-group col-md-3">
             <label for="example-datetime-local-input">Create Date</label>
-            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+            <input name='createDate' class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
           </div>
         </div> 
 
         <div class='form-row'>
           <div class="form-group col-md-2">
             <label for="example-datetime-local-input">Language</label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select name='language' class="form-control" id="exampleFormControlSelect1">
               <option>中文</option>
               <option>English</option>
             </select>
           </div>
           <div class="form-group col-md-2">
             <label for="example-datetime-local-input">Foreign-related</label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select name='foreign-related' class="form-control" id="exampleFormControlSelect1">
               <option>Y</option>
               <option>N</option>
             </select>
           </div>
           <div class="form-group col-md-2">
             <label for="example-datetime-local-input">Legal aid</label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select name='legalAid' class="form-control" id="exampleFormControlSelect1">
               <option>Y</option>
               <option>N</option>
             </select>
@@ -71,58 +71,89 @@
         <div calss="form-row">
           <div class='form-group col-mb-12'>
             <label for="inputCaseName">Case name</label>
-            <input class="form-control" type="text">
+            <input name='caseName' class="form-control" type="text">
           </div>
         </div>
 
-        <div data-role="dynamic-fields">
 
-          <div class='form-row'>
-            <div class="form-group col-md-2">
-              <label for="user-name-input">First name</label>
-              <input type="text" class="form-control" placeholder="First name">
-            </div>
-            <div class="form-group col-md-2">
-              <label for="user-name-input">Last name</label>
-              <input type="text" class="form-control" placeholder="Last name">
-            </div>
-            <div class="form-group col-md-3">
-              <label for="user-position-input">Position</label>
-              <input class="form-control" type="text">
-            </div>
-            <div class="form-group col-md-4">
-              <label for="example-datetime-local-input">Email</label>
-              <input type="email" class="form-control" id="userInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            </div>
-
-            <div class="form-group col-md-2">
-              <label for="user-name-input">Tel</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group col-md-2">
-              <label for="user-name-input">Mobile</label>
-              <input type="text" class="form-control">
-            </div>
-            <div class="form-group col-md-2">
-              <label for="user-position-input">Fax</label>
-              <input class="form-control" type="text">
-            </div>
-
-            <div calss="form-row">
-                <button type="button" class="btn btn-danger btn-sm" data-role="remove">Remove</button>  
-            </div>
-            <div calss="form-row">
-                <button type="button" class="btn btn-primary btn-sm" data-role="add">Add</button>
-            </div>
-
-          </div>  <!-- /div.form-row -->
-        </div>  <!-- /div[data-role="dynamic-fields"] -->
-
-
-        <div calss="form-row">
-          <button type="submit" class="btn btn-primary">Submit</button>
+        <div class='form-row'>
+          <div class="form-group col-md-2">
+            <label for="user-1-firstname-input">First name</label>
+            <input name='user-1-firstname-input-' type="text" class="form-control" placeholder="First name" id="user-1-firstname-input">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="user-1-lastname-input">Last name</label>
+            <input name='user-1-lastname-input' type="text" class="form-control" placeholder="Last name">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="user-1-position-input">Position</label>
+            <input name='"user-1-position-input" 'type='text' class="form-control" type="text">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="user-1-email-input">Email</label>
+            <input name="user-1-email-input" type="email" class="form-control" id="userInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="user-1-tel-input">Tel</label>
+            <input name="user-1-tel-input" type="text" class="form-control">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="user-1-mobile-input">Mobile</label>
+            <input name="user-1-mobile-input" type="text" class="form-control">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="user-1-fax-input">Fax</label>
+            <input name="user-1-fax-input" class="form-control" type="text">
+          </div>
         </div>
 
+        <div calss="form-row">
+          {{!-- <div class="form-group pl-0"> --}}
+            <label for="BranchFormControlSelect2">Branch</label>
+            <select multiple class="form-control" id="BranchFormControlSelect2">
+              {{#each caseBranchOption}}
+                <option value='{{this.fields.branchid}}'>{{this.fields.Title}}</option>
+              {{/each}}  
+            </select>
+          {{!-- </div> --}}
+          {{!-- <div class="form-group col-md-3 pl-0 mr-0"> --}}
+            <label for="departmentFormControlSelect2">Department</label>
+            <select multiple class="form-control" id="departmentFormControlSelect2">
+            </select>
+          {{!-- </div> --}}
+          {{!-- <div class="form-group col-md-3 pl-0 mr-0"> --}}
+            <label for="employeeFormControlSelect2">Employee</label>
+            <select multiple class="form-control" id="employeeFormControlSelect2">
+            </select>
+          {{!-- </div> --}}
+        </div>
+        <div class="form-row">
+          <ul class="list-group list-group-flush col-md-3">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+          </ul>
+          <ul class="list-group list-group-flush col-md-3">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+          </ul>
+        </div>
+
+
+
+
+{{!-- 
+        <div calss="form-row">
+          <button type="button" class="btn btn-primary" id='form-submit'>Submit</button>
+        </div>
+ --}}
 
       </form>
     {{else}}
@@ -141,39 +172,45 @@
         //responseObject = JSON.parse(response.data);
         let resultHtml = '';
         for(let a of response.data){
-          resultHtml +=`<option value='${a.fields.departmentid}'>${a.fields.Branch}-${a.fields.Title}</option>`;
+          resultHtml +=`<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>`;
         };
         $('#createMatterFormControlSelect3').html(resultHtml);
       } catch (error) {
         console.log(error);
       }
     });
-
-    $(function() {
-        // Remove button click
-        $(document).on(
-            'click',
-            '[data-role="dynamic-fields"] > .form-row [data-role="remove"]',
-            function(e) {
-                e.preventDefault();
-                $(this).closest('.form-row').remove();
-            }
-        );
-        // Add button click
-        $(document).on(
-            'click',
-            '[data-role="dynamic-fields"] > .form-row [data-role="add"]',
-            function(e) {
-                e.preventDefault();
-                var container = $(this).closest('[data-role="dynamic-fields"]');
-                new_field_group = container.children().filter('.form-row:first-child').clone();
-                new_field_group.find('input').each(function(){
-                    $(this).val('');
-                });
-                container.append(new_field_group);
-            }
-        );
-    });
+  $('#BranchFormControlSelect2').change(async function() {
+      const branchSelectValue = $(this).val();
+      const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+      let config = {headers: {Authorization: accessToken,}}
+      try {
+        const response = await axios.get(`http://localhost:3000/api/lists/items?list={{{caseDepartmentListName}}}&fName={{{caseDepartmentListBranchidCoulunm}}}&fValue='${branchSelectValue}'`, config);
+        //responseObject = JSON.parse(response.data);
+        let resultHtml = '';
+        for(let a of response.data){
+          resultHtml +=`<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>`;
+        };
+        $('#departmentFormControlSelect2').html(resultHtml);
+      } catch (error) {
+        console.log(error);
+      }
+  });
+  $('#departmentFormControlSelect2').change(async function() {
+      const departmentSelectValue = $(this).val();
+      const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+      let config = {headers: {Authorization: accessToken,}}
+      try {
+        const response = await axios.get(`http://localhost:3000/api/lists/items?list={{{caseEmployeeListName}}}&fName={{{caseEmployeeListBranchidCoulunm}}}&fValue='${departmentSelectValue}'`, config);
+        //responseObject = JSON.parse(response.data);
+        let resultHtml = '';
+        for(let a of response.data){
+          resultHtml +=`<option value='${a.fields.employeeid}'>${a.fields.employeeid}--${a.fields.Title}</option>`;
+        };
+        $('#employeeFormControlSelect2').html(resultHtml);
+      } catch (error) {
+        console.log(error);
+      }
+  });  
 
   </script>
 </div>

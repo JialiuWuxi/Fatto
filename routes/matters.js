@@ -42,6 +42,8 @@ router.get('/createnew', async function (req, res, next) {
     parms.caseDepartmentOption = response.data;
     parms.caseDepartmentListName = process.env.CASE_DEPARTMENT_LIST_NAME;
     parms.caseDepartmentListBranchidCoulunm = process.env.CASE_DEPARTMENT_LIST_BRANCHID_COULUMN;
+    parms.caseEmployeeListName = process.env.CASE_EMPLOYEE_LIST_NAME;
+    parms.caseEmployeeListBranchidCoulunm = process.env.CASE_EMPLOYEE_LIST_DEPARTMENTID_COULUMN;
 
   } catch (error) {
     console.error(error);
