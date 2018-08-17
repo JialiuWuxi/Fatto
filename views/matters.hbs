@@ -42,41 +42,93 @@
             <label for="example-datetime-local-input">Create Date</label>
             <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
           </div>
-          <div class="form-group col-md-1">
-            <label for="example-datetime-local-input">Langure</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>中文</option>
-              <option>英文</option>
-            </select>
-          </div>
-          <div class="form-group col-md-1">
-            <label for="example-datetime-local-input">Foreign</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>Y</option>
-              <option>N</option>
-            </select>
-          </div>
-          <div class="form-group col-md-1">
-            <label for="example-datetime-local-input">Help</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>Y</option>
-              <option>N</option>
-            </select>
-          </div>
         </div> 
 
-        <div calss="form-row">
-          <label for="inputCaseName">Case name</label>
-          <input class="form-control" type="text">
+        <div class='form-row'>
+          <div class="form-group col-md-2">
+            <label for="example-datetime-local-input">Language</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option>中文</option>
+              <option>English</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="example-datetime-local-input">Foreign-related</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option>Y</option>
+              <option>N</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="example-datetime-local-input">Legal aid</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option>Y</option>
+              <option>N</option>
+            </select>
+          </div>
         </div>
 
+        <div calss="form-row">
+          <div class='form-group col-mb-12'>
+            <label for="inputCaseName">Case name</label>
+            <input class="form-control" type="text">
+          </div>
+        </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div data-role="dynamic-fields">
+
+          <div class='form-row'>
+            <div class="form-group col-md-2">
+              <label for="user-name-input">First name</label>
+              <input type="text" class="form-control" placeholder="First name">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="user-name-input">Last name</label>
+              <input type="text" class="form-control" placeholder="Last name">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="user-position-input">Position</label>
+              <input class="form-control" type="text">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="example-datetime-local-input">Email</label>
+              <input type="email" class="form-control" id="userInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="user-name-input">Tel</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="user-name-input">Mobile</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="user-position-input">Fax</label>
+              <input class="form-control" type="text">
+            </div>
+
+            <div calss="form-row">
+                <button type="button" class="btn btn-danger btn-sm" data-role="remove">Remove</button>  
+            </div>
+            <div calss="form-row">
+                <button type="button" class="btn btn-primary btn-sm" data-role="add">Add</button>
+            </div>
+
+          </div>  <!-- /div.form-row -->
+        </div>  <!-- /div[data-role="dynamic-fields"] -->
+
+
+        <div calss="form-row">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
 
       </form>
     {{else}}
       <img src="../images/logo.png" class="rounded mx-auto d-block" alt="Responsive image">
     {{/if}}    
+
   </div>
 
   <script>
@@ -95,6 +147,32 @@
       } catch (error) {
         console.log(error);
       }
+    });
+
+    $(function() {
+        // Remove button click
+        $(document).on(
+            'click',
+            '[data-role="dynamic-fields"] > .form-row [data-role="remove"]',
+            function(e) {
+                e.preventDefault();
+                $(this).closest('.form-row').remove();
+            }
+        );
+        // Add button click
+        $(document).on(
+            'click',
+            '[data-role="dynamic-fields"] > .form-row [data-role="add"]',
+            function(e) {
+                e.preventDefault();
+                var container = $(this).closest('[data-role="dynamic-fields"]');
+                new_field_group = container.children().filter('.form-row:first-child').clone();
+                new_field_group.find('input').each(function(){
+                    $(this).val('');
+                });
+                container.append(new_field_group);
+            }
+        );
     });
 
   </script>
