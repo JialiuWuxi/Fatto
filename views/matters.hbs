@@ -226,7 +226,7 @@
 
         let resultHtml = '';
         for(let a of response.data.value){
-          resultHtml +=`<option value='${a.fields.employeeid}'>${a.fields.employeeid}--${a.fields.Title}</option>`;
+          resultHtml +=`<option value='${a.fields.employeeid}'>${a.fields.Title}</option>`;
         };
         $('#employeeFormControlSelect2').html(resultHtml);
       } catch (error) {
