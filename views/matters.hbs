@@ -11,14 +11,18 @@
     {{#if createFormView}}
       <form>
         <div class="form-row">
-            <div class="form-group col-md-3">
-              <label for="inputCategory">Category</label>
-              <select name="CategoryS"class="form-control" id="createMatterFormControlSelect1">
-                {{#each caseCategoryOption}}
-                  <option value='{{this.id}}'>{{this.fields.Title}}</option>
-                {{/each}}
-              </select>
-            </div>
+          <div class="form-group col-md-3">
+            <label for="inputCategory">Category</label>
+            <select name="CategoryS"class="form-control" id="createMatterFormControlSelect1">
+              {{#each caseCategoryOption}}
+                <option value='{{this.id}}'>{{this.fields.Title}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="example-datetime-local-input">Create Date</label>
+            <input name='createDate' class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+          </div>
         </div>    
 
         <div class="form-row"> 
@@ -37,10 +41,6 @@
                 {{!-- <option value='{{this.fields.departmentid}}'>{{this.fields.Branch}}-{{this.fields.Title}}</option> --}}
                 {{/each}}             
               </select>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="example-datetime-local-input">Create Date</label>
-            <input name='createDate' class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
           </div>
         </div> 
 
@@ -89,7 +89,7 @@
             <label for="user-1-position-input">Position</label>
             <input name='"user-1-position-input" 'type='text' class="form-control" type="text">
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-5">
             <label for="user-1-email-input">Email</label>
             <input name="user-1-email-input" type="email" class="form-control" id="userInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
           </div>
@@ -110,50 +110,72 @@
         </div>
 
         <div calss="form-row">
-          {{!-- <div class="form-group pl-0"> --}}
+          <div class="form-group col-md-3 pl-0 float-left">
             <label for="BranchFormControlSelect2">Branch</label>
             <select multiple class="form-control" id="BranchFormControlSelect2">
               {{#each caseBranchOption}}
                 <option value='{{this.fields.branchid}}'>{{this.fields.Title}}</option>
               {{/each}}  
             </select>
-          {{!-- </div> --}}
-          {{!-- <div class="form-group col-md-3 pl-0 mr-0"> --}}
+          </div>
+          <div class="form-group col-md-3 pl-0 float-left">
             <label for="departmentFormControlSelect2">Department</label>
             <select multiple class="form-control" id="departmentFormControlSelect2">
             </select>
-          {{!-- </div> --}}
-          {{!-- <div class="form-group col-md-3 pl-0 mr-0"> --}}
+          </div>
+          <div class="form-group col-md-3 pl-0 float-left">
             <label for="employeeFormControlSelect2">Employee</label>
             <select multiple class="form-control" id="employeeFormControlSelect2">
             </select>
-          {{!-- </div> --}}
+          </div>
         </div>
-        <div class="form-row">
-          <ul class="list-group list-group-flush col-md-3">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+        <div class="btn-group-vertical">
+            <button type="button" class="btn btn-success" id='anyuanren-add'>添加案源人</button>
+            <button type="button" class="btn btn-danger" id='anyuanren-delete' style='display:None'>删除案源人</button>
+            <button type="button" class="btn btn-success" id='zhuban-add'>添加主办律师</button>
+            <button type="button" class="btn btn-danger" id='zhuban-delete' style='display:None'>删除主办律师</button>
+            <button type="button" class="btn btn-success" id='duban-add'>添加督办律师</button>
+            <button type="button" class="btn btn-danger" id='duban-delete' style='display:None'>删除督办律师</button>
+        </div>
+        <div class="btn-group-vertical">
+            <button type="button" class="btn btn-success" id='xieban-add'>添加协办律师</button>
+            <button type="button" class="btn btn-danger" id='xieban-delete' style='display:None'>删除协办律师</button>
+            <button type="button" class="btn btn-success" id='zhuli-add'>添加律师助理</button>
+            <button type="button" class="btn btn-danger" id='zhuli-delete' style='display:None'>删除律师助理</button>
+            <button type="button" class="btn btn-success" id='mishu-add'>添加业务秘书</button>
+            <button type="button" class="btn btn-danger" id='mishu-delete' style='display:None'>删除业务秘书</button>
+        </div>
+
+        <div class="form-row" style="clear:both">
+          <ul class="list-group list-group-flush col-md-2" id="anyuanren_list">
+            <li class="list-group-item">案源人</li>
+            <li class="list-group-item">Empty</li>
           </ul>
-          <ul class="list-group list-group-flush col-md-3">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+          <ul class="list-group list-group-flush col-md-2" id="zhuban_list">
+            <li class="list-group-item">主办律师</li>
+            <li class="list-group-item">Empty</li>
+          </ul>
+          <ul class="list-group list-group-flush col-md-2" id="duban_list">
+            <li class="list-group-item">督办律师</li>
+            <li class="list-group-item">Empty</li>
+          </ul>
+          <ul class="list-group list-group-flush col-md-2" id="xieban_list">
+            <li class="list-group-item">协办律师</li>
+            <li class="list-group-item">Empty</li>
+          </ul>
+          <ul class="list-group list-group-flush col-md-2" id="zhuli_list">
+            <li class="list-group-item">律师助理</li>
+            <li class="list-group-item">Empty</li>
+          </ul>
+          <ul class="list-group list-group-flush col-md-2" id="mishu_list">
+            <li class="list-group-item">业务秘书</li>
+            <li class="list-group-item">Empty</li>
           </ul>
         </div>
 
-
-
-
-{{!-- 
         <div calss="form-row">
           <button type="button" class="btn btn-primary" id='form-submit'>Submit</button>
         </div>
- --}}
 
       </form>
     {{else}}
@@ -211,6 +233,116 @@
         console.log(error);
       }
   });  
+
+
+  
+  $('#anyuanren-add').click(function() {
+    const anyuanrenSelValue = $('#employeeFormControlSelect2').val();
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">案源人</li>
+                  <li class="list-group-item">${anyuanrenSelValue}</li>`;
+    $('#anyuanren_list').html(resultHtml);
+    $('#anyuanren-delete').show();
+    $(this).hide();
+  });
+  $('#anyuanren-delete').click(function() {
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">案源人</li>
+                  <li class="list-group-item">Empty</li>`;
+    $('#anyuanren_list').html(resultHtml);
+    $('#anyuanren-add').show();
+    $(this).hide();
+  });
+
+  $('#zhuban-add').click(function() {
+    const zhubanSelValue = $('#employeeFormControlSelect2').val();
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">主办律师</li>
+                  <li class="list-group-item">${zhubanSelValue}</li>`;
+    $('#zhuban_list').html(resultHtml);
+    $('#zhuban-delete').show();
+    $(this).hide();
+  });
+  $('#zhuban-delete').click(function() {
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">主办律师</li>
+                  <li class="list-group-item">Empty</li>`;
+    $('#zhuban_list').html(resultHtml);
+    $('#zhuban-add').show();
+    $(this).hide();
+  });
+
+  $('#duban-add').click(function() {
+    const dubanSelValue = $('#employeeFormControlSelect2').val();
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">督办律师</li>
+                  <li class="list-group-item">${dubanSelValue}</li>`;
+    $('#duban_list').html(resultHtml);
+    $('#duban-delete').show();
+    $(this).hide();
+  });
+  $('#duban-delete').click(function() {
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">督办律师</li>
+                  <li class="list-group-item">Empty</li>`;
+    $('#duban_list').html(resultHtml);
+    $('#duban-add').show();
+    $(this).hide();
+  });
+
+  $('#xieban-add').click(function() {
+    const xiebanSelValue = $('#employeeFormControlSelect2').val();
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">协办律师</li>
+                  <li class="list-group-item">${xiebanSelValue}</li>`;
+    $('#xieban_list').html(resultHtml);
+    $('#xieban-delete').show();
+    $(this).hide();
+  });
+  $('#xieban-delete').click(function() {
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">协办律师</li>
+                  <li class="list-group-item">Empty</li>`;
+    $('#xieban_list').html(resultHtml);
+    $('#xieban-add').show();
+    $(this).hide();
+  });  
+
+  $('#zhuli-add').click(function() {
+    const zhuliSelValue = $('#employeeFormControlSelect2').val();
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">律师助理</li>
+                  <li class="list-group-item">${zhuliSelValue}</li>`;
+    $('#zhuli_list').html(resultHtml);
+    $('#zhuli-delete').show();
+    $(this).hide();
+  });
+  $('#zhuli-delete').click(function() {
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">律师助理</li>
+                  <li class="list-group-item">Empty</li>`;
+    $('#zhuli_list').html(resultHtml);
+    $('#zhuli-add').show();
+    $(this).hide();
+  }); 
+
+  $('#mishu-add').click(function() {
+    const mishuSelValue = $('#employeeFormControlSelect2').val();
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">业务秘书</li>
+                  <li class="list-group-item">${mishuSelValue}</li>`;
+    $('#mishu_list').html(resultHtml);
+    $('#mishu-delete').show();
+    $(this).hide();
+  });
+  $('#mishu-delete').click(function() {
+    let resultHtml = '';
+    resultHtml = `<li class="list-group-item">业务秘书</li>
+                  <li class="list-group-item">Empty</li>`;
+    $('#mishu_list').html(resultHtml);
+    $('#mishu-add').show();
+    $(this).hide();
+  }); 
 
   </script>
 </div>
