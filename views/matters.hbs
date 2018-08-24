@@ -168,10 +168,10 @@
       const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       let config = {headers: {Authorization: accessToken,}}
       try {
-        const response = await axios.get(`http://localhost:3000/api/lists/items?list={{{caseDepartmentListName}}}&fName={{{caseDepartmentListBranchidCoulunm}}}&fValue='${branchSelectValue}'`, config);
-        //responseObject = JSON.parse(response.data);
+        const response = await axios.get(`http://fatto.ltd/api/v2/departments?branchid='${branchSelectValue}'`, config);
+
         let resultHtml = '';
-        for(let a of response.data){
+        for(let a of response.data.value){
           resultHtml +=`<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>`;
         };
         $('#createMatterFormControlSelect3').html(resultHtml);
@@ -184,10 +184,10 @@
       const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       let config = {headers: {Authorization: accessToken,}}
       try {
-        const response = await axios.get(`http://localhost:3000/api/lists/items?list={{{caseDepartmentListName}}}&fName={{{caseDepartmentListBranchidCoulunm}}}&fValue='${branchSelectValue}'`, config);
-        //responseObject = JSON.parse(response.data);
+        const response = await axios.get(`http://fatto.ltd/api/v2/departments?branchid='${branchSelectValue}'`, config);
+
         let resultHtml = '';
-        for(let a of response.data){
+        for(let a of response.data.value){
           resultHtml +=`<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>`;
         };
         $('#departmentFormControlSelect2').html(resultHtml);
@@ -200,10 +200,10 @@
       const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       let config = {headers: {Authorization: accessToken,}}
       try {
-        const response = await axios.get(`http://localhost:3000/api/lists/items?list={{{caseEmployeeListName}}}&fName={{{caseEmployeeListBranchidCoulunm}}}&fValue='${departmentSelectValue}'`, config);
-        //responseObject = JSON.parse(response.data);
+        const response = await axios.get(`http://fatto.ltd/api/v2/employees?departmentid='${departmentSelectValue}'`, config);
+
         let resultHtml = '';
-        for(let a of response.data){
+        for(let a of response.data.value){
           resultHtml +=`<option value='${a.fields.employeeid}'>${a.fields.employeeid}--${a.fields.Title}</option>`;
         };
         $('#employeeFormControlSelect2').html(resultHtml);
