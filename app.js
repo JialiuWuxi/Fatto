@@ -8,7 +8,7 @@ require('dotenv').config();
 var indexRouter = require('./routes/index');
 var authorize = require('./routes/authorize');
 var matters = require('./routes/matters');
-// var api = require('./routes/api');
+
 
 var app = express();
 
@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/authorize', authorize);
 app.use('/matters', matters);
-// app.use('/api/lists', api);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
