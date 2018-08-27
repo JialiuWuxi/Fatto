@@ -10,168 +10,246 @@
   <div class="col-9 bg-light">
     {{#if createFormView}}
       <form>
-        <div class="form-row">
-          <div class="form-group col-md-3">
-            <label for="inputCategory">Category</label>
-            <select name="CategoryS"class="form-control" id="createMatterFormControlSelect1">
-              {{#each caseCategoryOption}}
-                <option value='{{this.id}}'>{{this.fields.Title}}</option>
-              {{/each}}
-            </select>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="example-datetime-local-input">Create Date</label>
-            <input name='createDate' class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
-          </div>
-        </div>    
 
-        <div class="form-row"> 
-          <div class="form-group col-md-3">  
-            <label for="inputBranch">Branch</label>
-            <select name="BranchS" class="form-control" id="createMatterFormControlSelect2">
-              {{#each caseBranchOption}}
-                <option value='{{this.fields.branchid}}'>{{this.fields.Title}}</option>
-              {{/each}}
-            </select>
-          </div>
-          <div class="form-group col-md-3">  
-            <label for="inputDepartment">Department</label>
-              <select name='{{caseDepartmentListName}}' class="form-control" id="createMatterFormControlSelect3">
-                {{#each caseDepartmentOption}}
-                {{!-- <option value='{{this.fields.departmentid}}'>{{this.fields.Branch}}-{{this.fields.Title}}</option> --}}
-                {{/each}}             
-              </select>
-          </div>
-        </div> 
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Matter Information
+                </button>
+              </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
 
-        <div class='form-row'>
-          <div class="form-group col-md-2">
-            <label for="example-datetime-local-input">Language</label>
-            <select name='language' class="form-control" id="exampleFormControlSelect1">
-              <option>中文</option>
-              <option>English</option>
-            </select>
+                <div class="form-row">
+                  <div class="form-group col-md-3">
+                    <label for="inputCategory">Category</label>
+                    <select name="CategoryS"class="form-control" id="createMatterFormControlSelect1">
+                      {{#each caseCategoryOption}}
+                        <option value='{{this.id}}'>{{this.fields.Title}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="example-datetime-local-input">Create Date</label>
+                    <input name='createDate' class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                  </div>
+                </div>    
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                  <label for="client-select-input">Client</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-client-search">Search</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row"> 
+                  <div class="form-group col-md-3">  
+                    <label for="inputBranch">Branch</label>
+                    <select name="BranchS" class="form-control" id="createMatterFormControlSelect2">
+                      {{#each caseBranchOption}}
+                        <option value='{{this.fields.branchid}}'>{{this.fields.Title}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3">  
+                    <label for="inputDepartment">Department</label>
+                      <select name='{{caseDepartmentListName}}' class="form-control" id="createMatterFormControlSelect3">
+                        {{#each caseDepartmentOption}}
+                        {{!-- <option value='{{this.fields.departmentid}}'>{{this.fields.Branch}}-{{this.fields.Title}}</option> --}}
+                        {{/each}}             
+                      </select>
+                  </div>
+                </div> 
+
+                <div class='form-row'>
+                  <div class="form-group col-md-2">
+                    <label for="example-datetime-local-input">Language</label>
+                    <select name='language' class="form-control" id="exampleFormControlSelect1">
+                      <option>中文</option>
+                      <option>English</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="example-datetime-local-input">Foreign-related</label>
+                    <select name='foreign-related' class="form-control" id="exampleFormControlSelect1">
+                      <option>Y</option>
+                      <option>N</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="example-datetime-local-input">Legal aid</label>
+                    <select name='legalAid' class="form-control" id="exampleFormControlSelect1">
+                      <option>Y</option>
+                      <option>N</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div calss="form-row">
+                  <div class='form-group col-mb-12'>
+                    <label for="inputCaseName">Case name</label>
+                    <input name='caseName' class="form-control" type="text">
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
           </div>
-          <div class="form-group col-md-2">
-            <label for="example-datetime-local-input">Foreign-related</label>
-            <select name='foreign-related' class="form-control" id="exampleFormControlSelect1">
-              <option>Y</option>
-              <option>N</option>
-            </select>
+
+
+
+
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Related Contacts
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div class="card-body">
+                <div class='form-row'>
+                  <div class="form-group col-md-2">
+                    <label for="user-1-firstname-input">First name</label>
+                    <input name='user-1-firstname-input-' type="text" class="form-control" placeholder="First name" id="user-1-firstname-input">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="user-1-lastname-input">Last name</label>
+                    <input name='user-1-lastname-input' type="text" class="form-control" placeholder="Last name">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="user-1-position-input">Position</label>
+                    <input name='"user-1-position-input" 'type='text' class="form-control" type="text">
+                  </div>
+                  <div class="form-group col-md-5">
+                    <label for="user-1-email-input">Email</label>
+                    <input name="user-1-email-input" type="email" class="form-control" id="userInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label for="user-1-tel-input">Tel</label>
+                    <input name="user-1-tel-input" type="text" class="form-control">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="user-1-mobile-input">Mobile</label>
+                    <input name="user-1-mobile-input" type="text" class="form-control">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="user-1-fax-input">Fax</label>
+                    <input name="user-1-fax-input" class="form-control" type="text">
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="form-group col-md-2">
-            <label for="example-datetime-local-input">Legal aid</label>
-            <select name='legalAid' class="form-control" id="exampleFormControlSelect1">
-              <option>Y</option>
-              <option>N</option>
-            </select>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Role
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+
+                <div calss="form-row">
+                  <div class="form-group col-md-3 pl-0 float-left">
+                    <label for="BranchFormControlSelect2">Branch</label>
+                    <select multiple class="form-control" id="BranchFormControlSelect2">
+                      {{#each caseBranchOption}}
+                        <option value='{{this.fields.branchid}}'>{{this.fields.Title}}</option>
+                      {{/each}}  
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3 pl-0 float-left">
+                    <label for="departmentFormControlSelect2">Department</label>
+                    <select multiple class="form-control" id="departmentFormControlSelect2">
+                    </select>
+                  </div>
+                  <div class="form-group col-md-3 pl-0 float-left">
+                    <label for="employeeFormControlSelect2">Employee</label>
+                    <select multiple class="form-control" id="employeeFormControlSelect2">
+                    </select>
+                  </div>
+                </div>
+                <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-success" id='anyuanren-add'>添加案源人</button>
+                    <button type="button" class="btn btn-danger" id='anyuanren-delete' style='display:None'>删除案源人</button>
+                    <button type="button" class="btn btn-success" id='zhuban-add'>添加主办律师</button>
+                    <button type="button" class="btn btn-danger" id='zhuban-delete' style='display:None'>删除主办律师</button>
+                    <button type="button" class="btn btn-success" id='duban-add'>添加督办律师</button>
+                    <button type="button" class="btn btn-danger" id='duban-delete' style='display:None'>删除督办律师</button>
+                </div>
+                <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-success" id='xieban-add'>添加协办律师</button>
+                    <button type="button" class="btn btn-danger" id='xieban-delete' style='display:None'>删除协办律师</button>
+                    <button type="button" class="btn btn-success" id='zhuli-add'>添加律师助理</button>
+                    <button type="button" class="btn btn-danger" id='zhuli-delete' style='display:None'>删除律师助理</button>
+                    <button type="button" class="btn btn-success" id='mishu-add'>添加业务秘书</button>
+                    <button type="button" class="btn btn-danger" id='mishu-delete' style='display:None'>删除业务秘书</button>
+                </div>
+
+                <div class="form-row" style="clear:both">
+                  <ul class="list-group list-group-flush col-md-2" id="anyuanren_list">
+                    <li class="list-group-item">案源人</li>
+                    <li class="list-group-item">Empty</li>
+                  </ul>
+                  <ul class="list-group list-group-flush col-md-2" id="zhuban_list">
+                    <li class="list-group-item">主办律师</li>
+                    <li class="list-group-item">Empty</li>
+                  </ul>
+                  <ul class="list-group list-group-flush col-md-2" id="duban_list">
+                    <li class="list-group-item">督办律师</li>
+                    <li class="list-group-item">Empty</li>
+                  </ul>
+                  <ul class="list-group list-group-flush col-md-2" id="xieban_list">
+                    <li class="list-group-item">协办律师</li>
+                    <li class="list-group-item">Empty</li>
+                  </ul>
+                  <ul class="list-group list-group-flush col-md-2" id="zhuli_list">
+                    <li class="list-group-item">律师助理</li>
+                    <li class="list-group-item">Empty</li>
+                  </ul>
+                  <ul class="list-group list-group-flush col-md-2" id="mishu_list">
+                    <li class="list-group-item">业务秘书</li>
+                    <li class="list-group-item">Empty</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
 
-        <div calss="form-row">
-          <div class='form-group col-mb-12'>
-            <label for="inputCaseName">Case name</label>
-            <input name='caseName' class="form-control" type="text">
-          </div>
-        </div>
 
 
-        <div class='form-row'>
-          <div class="form-group col-md-2">
-            <label for="user-1-firstname-input">First name</label>
-            <input name='user-1-firstname-input-' type="text" class="form-control" placeholder="First name" id="user-1-firstname-input">
-          </div>
-          <div class="form-group col-md-2">
-            <label for="user-1-lastname-input">Last name</label>
-            <input name='user-1-lastname-input' type="text" class="form-control" placeholder="Last name">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="user-1-position-input">Position</label>
-            <input name='"user-1-position-input" 'type='text' class="form-control" type="text">
-          </div>
-          <div class="form-group col-md-5">
-            <label for="user-1-email-input">Email</label>
-            <input name="user-1-email-input" type="email" class="form-control" id="userInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-2">
-            <label for="user-1-tel-input">Tel</label>
-            <input name="user-1-tel-input" type="text" class="form-control">
-          </div>
-          <div class="form-group col-md-2">
-            <label for="user-1-mobile-input">Mobile</label>
-            <input name="user-1-mobile-input" type="text" class="form-control">
-          </div>
-          <div class="form-group col-md-2">
-            <label for="user-1-fax-input">Fax</label>
-            <input name="user-1-fax-input" class="form-control" type="text">
-          </div>
-        </div>
 
-        <div calss="form-row">
-          <div class="form-group col-md-3 pl-0 float-left">
-            <label for="BranchFormControlSelect2">Branch</label>
-            <select multiple class="form-control" id="BranchFormControlSelect2">
-              {{#each caseBranchOption}}
-                <option value='{{this.fields.branchid}}'>{{this.fields.Title}}</option>
-              {{/each}}  
-            </select>
-          </div>
-          <div class="form-group col-md-3 pl-0 float-left">
-            <label for="departmentFormControlSelect2">Department</label>
-            <select multiple class="form-control" id="departmentFormControlSelect2">
-            </select>
-          </div>
-          <div class="form-group col-md-3 pl-0 float-left">
-            <label for="employeeFormControlSelect2">Employee</label>
-            <select multiple class="form-control" id="employeeFormControlSelect2">
-            </select>
-          </div>
-        </div>
-        <div class="btn-group-vertical">
-            <button type="button" class="btn btn-success" id='anyuanren-add'>添加案源人</button>
-            <button type="button" class="btn btn-danger" id='anyuanren-delete' style='display:None'>删除案源人</button>
-            <button type="button" class="btn btn-success" id='zhuban-add'>添加主办律师</button>
-            <button type="button" class="btn btn-danger" id='zhuban-delete' style='display:None'>删除主办律师</button>
-            <button type="button" class="btn btn-success" id='duban-add'>添加督办律师</button>
-            <button type="button" class="btn btn-danger" id='duban-delete' style='display:None'>删除督办律师</button>
-        </div>
-        <div class="btn-group-vertical">
-            <button type="button" class="btn btn-success" id='xieban-add'>添加协办律师</button>
-            <button type="button" class="btn btn-danger" id='xieban-delete' style='display:None'>删除协办律师</button>
-            <button type="button" class="btn btn-success" id='zhuli-add'>添加律师助理</button>
-            <button type="button" class="btn btn-danger" id='zhuli-delete' style='display:None'>删除律师助理</button>
-            <button type="button" class="btn btn-success" id='mishu-add'>添加业务秘书</button>
-            <button type="button" class="btn btn-danger" id='mishu-delete' style='display:None'>删除业务秘书</button>
-        </div>
 
-        <div class="form-row" style="clear:both">
-          <ul class="list-group list-group-flush col-md-2" id="anyuanren_list">
-            <li class="list-group-item">案源人</li>
-            <li class="list-group-item">Empty</li>
-          </ul>
-          <ul class="list-group list-group-flush col-md-2" id="zhuban_list">
-            <li class="list-group-item">主办律师</li>
-            <li class="list-group-item">Empty</li>
-          </ul>
-          <ul class="list-group list-group-flush col-md-2" id="duban_list">
-            <li class="list-group-item">督办律师</li>
-            <li class="list-group-item">Empty</li>
-          </ul>
-          <ul class="list-group list-group-flush col-md-2" id="xieban_list">
-            <li class="list-group-item">协办律师</li>
-            <li class="list-group-item">Empty</li>
-          </ul>
-          <ul class="list-group list-group-flush col-md-2" id="zhuli_list">
-            <li class="list-group-item">律师助理</li>
-            <li class="list-group-item">Empty</li>
-          </ul>
-          <ul class="list-group list-group-flush col-md-2" id="mishu_list">
-            <li class="list-group-item">业务秘书</li>
-            <li class="list-group-item">Empty</li>
-          </ul>
-        </div>
+
+
+
+
+
+
+
+        
+
+
+
+
+
 
         <div calss="form-row">
           <button type="button" class="btn btn-primary" id='form-submit'>Submit</button>
