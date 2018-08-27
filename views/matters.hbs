@@ -34,7 +34,7 @@
                   </div>
                   <div class="form-group col-md-3">
                     <label for="example-datetime-local-input">Create Date</label>
-                    <input name='createDate' class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input">
+                    <input name='createDate' class="form-control" type="datetime-local" value="2018-08-18T13:45:00" id="example-datetime-local-input">
                   </div>
                 </div>    
 
@@ -42,14 +42,17 @@
                   <div class="form-group col-md-6">
                   <label for="client-select-input">Client</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                      <select name="CategoryS"class="form-control" id="createMatterFormControlSelect1">
+                      {{#each clientList}}
+                        <option value='{{this.id}}'>{{this.fields.Title}}</option>
+                      {{/each}}
+                      </select>
                       <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-client-search">Search</button>
+                        {{!-- <button class="btn btn-outline-secondary" type="button" id="button-client-search">Search</button> --}}
                       </div>
                     </div>
                   </div>
                 </div>
-
 
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
@@ -71,8 +74,13 @@
                             <div class="row">
                               <div class="col-md-12">
                                   <label for="inputCLientName">Client Name</label>
-                                  <input name='client-name-input' type="text" class="form-control" id="client-name-input">
-
+                                  <input name='client-name-input' type="text" class="form-control" id="new-client-name-input">
+                                  <label for="inputClientAddress">Client Address</label>
+                                  <input name='client-address-input' type="text" class="form-control" id="new-client-address-input">
+                                  <label for="inputCLientPhone">Client Phone</label>
+                                  <input name='client-phone-input' type="text" class="form-control" id="new-client-phone-input">
+                                  <label for="inputCLientZIPcode">Client ZIP</label>
+                                  <input name='client-zip-input' type="text" class="form-control" id="new-client-zip-input">
                               </div>
                             </div>
                             
@@ -80,7 +88,7 @@
                         </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="modal-save-button">Save</button>
                       </div>
                     </div>
                   </div>
@@ -458,6 +466,15 @@
     $('#mishu-add').show();
     $(this).hide();
   }); 
+  $('#modal-save-button').click(function() {
+    let client = {};
+    client.name = $('#new-client-name-input').val();
+    client.address = $('#new-client-address-input').val();
+    client.phone = $('#new-client-phone-input').val();
+    client.zip = $('#new-client-zip-input').val();
+
+
+  });
 
   </script>
 </div>

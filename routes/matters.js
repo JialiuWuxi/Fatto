@@ -40,6 +40,8 @@ router.get('/createnew', async function (req, res, next) {
     parms.caseCategoryOption = response.data.value;    
     response = await axios.get(`${process.env.API_HOSTNAME}/api/v2/departments`, config);
     parms.caseDepartmentOption = response.data.value;
+    response = await axios.get(`${process.env.API_HOSTNAME}/api/v2/clients`, config);
+    parms.clientList = response.data.value;    
 
   } catch (error) {
     console.error(error);
