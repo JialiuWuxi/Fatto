@@ -279,23 +279,6 @@
         </div>
 
 
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
         <div calss="form-row">
           <button type="button" class="btn btn-primary" id='form-submit'>Submit</button>
         </div>
@@ -313,7 +296,7 @@
       const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       let config = {headers: {Authorization: accessToken,}}
       try {
-        const response = await axios.get(`http://fatto.ltd/api/v2/departments?branchid='${branchSelectValue}'`, config);
+        const response = await axios.get(`http://localhost:4000/api/v2/departments?branchid='${branchSelectValue}'`, config);
 
         let resultHtml = '';
         for(let a of response.data.value){
@@ -329,7 +312,7 @@
       const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       let config = {headers: {Authorization: accessToken,}}
       try {
-        const response = await axios.get(`http://fatto.ltd/api/v2/departments?branchid='${branchSelectValue}'`, config);
+        const response = await axios.get(`http://localhost:4000/api/v2/departments?branchid='${branchSelectValue}'`, config);
 
         let resultHtml = '';
         for(let a of response.data.value){
@@ -345,7 +328,7 @@
       const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       let config = {headers: {Authorization: accessToken,}}
       try {
-        const response = await axios.get(`http://fatto.ltd/api/v2/employees?departmentid='${departmentSelectValue}'`, config);
+        const response = await axios.get(`http://localhost:4000/api/v2/employees?departmentid='${departmentSelectValue}'`, config);
 
         let resultHtml = '';
         for(let a of response.data.value){
@@ -466,14 +449,28 @@
     $('#mishu-add').show();
     $(this).hide();
   }); 
-  $('#modal-save-button').click(function() {
+  $('#modal-save-button').click(async function() {
     let client = {};
-    client.name = $('#new-client-name-input').val();
-    client.address = $('#new-client-address-input').val();
-    client.phone = $('#new-client-phone-input').val();
-    client.zip = $('#new-client-zip-input').val();
-
-
+    client.Title = $('#new-client-name-input').val();
+    client.clientAddress = $('#new-client-address-input').val();
+    client.clientPhone = $('#new-client-phone-input').val();
+    client.clientZIP = $('#new-client-zip-input').val();
+    const data = client;
+ 
+    const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+      let config = {headers: {Authorization: accessToken,}}
+      try {
+        const response = await axios.post(`http://localhost:4000/api/v2/clients`, data, config);
+        console.log('BBC');
+      } catch (error) {
+        console.log(error);
+      }
+    //hiden the modal and clean the input fields
+    $('#exampleModalCenter').modal('hide')
+    $('#new-client-name-input').val('');
+    $('#new-client-address-input').val('');
+    $('#new-client-phone-input').val('');
+    $('#new-client-zip-input').val('')
   });
 
   </script>
