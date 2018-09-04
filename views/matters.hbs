@@ -9,7 +9,7 @@
   </div>
   <div class="col-9 bg-light">
     {{#if createFormView}}
-      <form>
+      <form id="createNewMatterForm">
 
         <div class="accordion" id="accordionExample">
           <div class="card">
@@ -26,7 +26,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-3">
                     <label for="inputCategory">Category</label>
-                    <select name="CategoryS" class="form-control" id="createMatterFormControlSelect1">
+                    <select name="categorySel" class="form-control" id="createMatterFormControlSelect1">
                       {{#each caseCategoryOption}}
                         <option value='{{this.id}}'>{{this.fields.Title}}</option>
                       {{/each}}
@@ -98,7 +98,7 @@
                 <div class="form-row"> 
                   <div class="form-group col-md-3">  
                     <label for="inputBranch">Branch</label>
-                    <select name="BranchS" class="form-control" id="createMatterFormControlSelect2">
+                    <select name="branchSel" class="form-control" id="createMatterFormControlSelect2">
                       {{#each caseBranchOption}}
                         <option value='{{this.fields.branchid}}'>{{this.fields.Title}}</option>
                       {{/each}}
@@ -106,7 +106,7 @@
                   </div>
                   <div class="form-group col-md-3">  
                     <label for="inputDepartment">Department</label>
-                      <select name='{{caseDepartmentListName}}' class="form-control" id="createMatterFormControlSelect3">
+                      <select name="departmentSel" class="form-control" id="createMatterFormControlSelect3">
                         {{#each caseDepartmentOption}}
                         {{!-- <option value='{{this.fields.departmentid}}'>{{this.fields.Branch}}-{{this.fields.Title}}</option> --}}
                         {{/each}}             
@@ -166,7 +166,7 @@
                 <div class='form-row'>
                   <div class="form-group col-md-2">
                     <label for="user-1-firstname-input">First name</label>
-                    <input name='user-1-firstname-input-' type="text" class="form-control" placeholder="First name" id="user-1-firstname-input">
+                    <input name='user-1-firstname-input' type="text" class="form-control" placeholder="First name" id="user-1-firstname-input">
                   </div>
                   <div class="form-group col-md-2">
                     <label for="user-1-lastname-input">Last name</label>
@@ -318,7 +318,7 @@
     client.clientPhone = $('#new-client-phone-input').val();
     client.clientZIP = $('#new-client-zip-input').val();
     const data = client;
-    
+
     $('#exampleModalCenter').modal('hide')
     await law.postListItems ( data );
 
@@ -370,6 +370,12 @@
   $('#mishu-delete').click(function() {
     law.delPeople('mishu', '律师秘书');
   }); 
+
+  $('#form-submit').click(function() {
+    const data = $('#createNewMatterForm').serializeArray();
+    console.log(data);
+  });
+
 
   </script>
 </div>

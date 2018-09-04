@@ -45,7 +45,8 @@ window.law.addPeople = function (elementValue, elementName, displayName) {
     const SelValue = $(elementValue).val();
     let resultHtml = '';
     resultHtml = `<li class="list-group-item">${displayName}</li>
-                  <li class="list-group-item">${SelValue}</li>`;
+                  <li class="list-group-item">${SelValue}</li>
+                  <input type='hidden' name='${elementName}' value=${SelValue}> `;
     $(`#${elementName}_list`).html(resultHtml);
     $(`#${elementName}-delete`).show();
     $(`#${elementName}-add`).hide();
@@ -54,7 +55,8 @@ window.law.addPeople = function (elementValue, elementName, displayName) {
 window.law.delPeople = function(elementName, displayName) {
     let resultHtml = '';
     resultHtml = `<li class="list-group-item">${displayName}</li>
-                  <li class="list-group-item">Empty</li>`;
+                  <li class="list-group-item">Empty</li>
+                  <input type='hidden' name='${elementName}' value="">`;
     $(`#${elementName}_list`).html(resultHtml);
     $(`#${elementName}-add`).show();
     $(`#${elementName}-delete`).hide();
