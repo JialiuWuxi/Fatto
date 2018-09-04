@@ -293,45 +293,24 @@
   <script src="../service/service.js"></script>
 
   <script>
-
+  //when user click the Create New button then show the londing dialog
   $('.nav-link').click( function (){
     waitingDialog.show();
   });
-
+  //when user select the branch then change the department select options
   $('#createMatterFormControlSelect2').change(function() {
-    law.getListItems (this, '#createMatterFormControlSelect3', function( a ) { return `<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>`})
+    law.getListItems (this, '#createMatterFormControlSelect3', 1, function( a ) { return `<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>`})
   });
-
+  //when user select the branch then change the department select options
   $('#BranchFormControlSelect2').change( function () {
-    law.getListItems (this, '#departmentFormControlSelect2', function( a ) { return `<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>` })
+    law.getListItems (this, '#departmentFormControlSelect2', 1, function( a ) { return `<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>` })
   });
-
-
-  //
+  //when user select the department then change the employee select options
   $('#departmentFormControlSelect2').change(async function() {
-      waitingDialog.show();
-      const departmentSelectValue = $(this).val();
-      const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-      let config = {headers: {Authorization: accessToken,}}
-      try {
-        const response = await axios.get(`http://localhost:4000/api/v2/employees?departmentid='${departmentSelectValue}'`, config);
-
-        let resultHtml = '';
-        for(let a of response.data.value){
-          resultHtml +=`<option value='${a.fields.employeeid}'>${a.fields.Title}</option>`;
-        };
-        $('#employeeFormControlSelect2').html(resultHtml);
-        waitingDialog.hide();
-      } catch (error) {
-        console.log(error);
-        waitingDialog.hide();
-      }
+      law.getListItems (this, '#employeeFormControlSelect2', 2, function( a ) { return `<option value='${a.fields.employeeid}'>${a.fields.Title}</option>` })
   });  
 
-
-
-
-  //modal 
+  //modal popout
   $('#modal-save-button').click(async function() {
     let client = {};
     client.Title = $('#new-client-name-input').val();

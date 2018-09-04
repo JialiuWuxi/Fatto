@@ -1,13 +1,18 @@
 if (typeof law === 'undefined') window.law = {};
 
-window.law.getListItems = async function (element, elementNeedUpdate, callback) {
+window.law.getListItems = async function (element, elementNeedUpdate, recourseOption, callback) {
     waitingDialog.show();
     const SelectValue = $(element).val();
     const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     let config = { headers: { Authorization: accessToken, } }
     try {
-        const response = await axios.get(`http://localhost:4000/api/v2/departments?branchid='${SelectValue}'`, config);
-
+        if( recourseOption === 1) {
+            var response = await axios.get(`http://localhost:4000/api/v2/departments?branchid='${SelectValue}'`, config);
+        }else if(recourseOption === 2){
+            var response = await axios.get(`http://localhost:4000/api/v2/employees?departmentid='${SelectValue}'`, config);
+        }else{
+            throw 'Option error';
+        }
         let resultHtml = '';
         for (let a of response.data.value) {
             resultHtml += callback(a);
@@ -38,3 +43,4 @@ window.law.delPeople = function(elementName, displayName) {
     $(`#${elementName}-add`).show();
     $(`#${elementName}-delete`).hide();
 }
+
