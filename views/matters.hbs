@@ -320,7 +320,7 @@
     const data = client;
 
     $('#exampleModalCenter').modal('hide')
-    await law.postListItems ( data );
+    await law.postListItems ( data, 1 );
 
     //hiden the modal and clean the input fields
     $('#new-client-name-input').val('');
@@ -373,7 +373,7 @@
 
   $('#form-submit').click(function() {
     const data = $('#createNewMatterForm').serializeArray();
-    console.log(data);
+    law.postListItems(data, 2);
   });
 
 

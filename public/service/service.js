@@ -28,12 +28,18 @@ window.law.getListItems = async function (element, elementNeedUpdate, recourseOp
     }
 };
 
-window.law.postListItems = async function (data) {
+window.law.postListItems = async function (data, APIOption) {
 
     const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     let config = { headers: { Authorization: accessToken, } }
     try {
-        await axios.post(`http://localhost:4000/api/v2/clients`, data, config);
+        if(APIOption === 1){
+            await axios.post(`http://localhost:4000/api/v2/clients`, data, config);
+        }else if(APIOption === 2){
+            await axios.post(`http://localhost:4000/api/v2/matters`, data, config);
+        }else{
+            throw 'Option error'
+        }
     } catch ( error ) {
         console.log(error);
     }
