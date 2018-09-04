@@ -6,13 +6,16 @@ window.law.getListItems = async function (element, elementNeedUpdate, recourseOp
     const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     let config = { headers: { Authorization: accessToken, } }
     try {
-        if( recourseOption === 1) {
+        if( recourseOption === 1 ) {
             var response = await axios.get(`http://localhost:4000/api/v2/departments?branchid='${SelectValue}'`, config);
-        }else if(recourseOption === 2){
+        }else if( recourseOption === 2 ){
             var response = await axios.get(`http://localhost:4000/api/v2/employees?departmentid='${SelectValue}'`, config);
+        }else if( recourseOption === 3 ){
+            var response = await axios.get(`http://localhost:4000/api/v2/clients`, config);
         }else{
             throw 'Option error';
         }
+
         let resultHtml = '';
         for (let a of response.data.value) {
             resultHtml += callback(a);
@@ -24,6 +27,19 @@ window.law.getListItems = async function (element, elementNeedUpdate, recourseOp
         waitingDialog.hide();
     }
 };
+
+window.law.postListItems = async function (data) {
+
+    const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    let config = { headers: { Authorization: accessToken, } }
+    try {
+        await axios.post(`http://localhost:4000/api/v2/clients`, data, config);
+    } catch ( error ) {
+        console.log(error);
+    }
+
+};
+
 
 window.law.addPeople = function (elementValue, elementName, displayName) {
     const SelValue = $(elementValue).val();

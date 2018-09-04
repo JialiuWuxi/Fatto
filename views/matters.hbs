@@ -26,7 +26,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-3">
                     <label for="inputCategory">Category</label>
-                    <select name="CategoryS"class="form-control" id="createMatterFormControlSelect1">
+                    <select name="CategoryS" class="form-control" id="createMatterFormControlSelect1">
                       {{#each caseCategoryOption}}
                         <option value='{{this.id}}'>{{this.fields.Title}}</option>
                       {{/each}}
@@ -42,7 +42,7 @@
                   <div class="form-group col-md-6">
                   <label for="client-select-input">Client</label>
                     <div class="input-group">
-                      <select name="CategoryS"class="form-control" id="createMatterFormClientSelect">
+                      <select name="clientSel" class="form-control" id="createMatterFormClientSelect">
                       {{#each clientList}}
                         <option value='{{this.id}}'>{{this.fields.Title}}</option>
                       {{/each}}
@@ -318,35 +318,20 @@
     client.clientPhone = $('#new-client-phone-input').val();
     client.clientZIP = $('#new-client-zip-input').val();
     const data = client;
- 
-    const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-    let config = {headers: {Authorization: accessToken,}}
-    try {
-      const response = await axios.post(`http://localhost:4000/api/v2/clients`, data, config);
-    } catch (error) {
-      console.log(error);
-    }
-    //hiden the modal and clean the input fields
+    
     $('#exampleModalCenter').modal('hide')
+    await law.postListItems ( data );
+
+    //hiden the modal and clean the input fields
     $('#new-client-name-input').val('');
     $('#new-client-address-input').val('');
     $('#new-client-phone-input').val('');
     $('#new-client-zip-input').val('')
     //update client select dropdown 
-    try {
-      const response = await axios.get(`http://localhost:4000/api/v2/clients`, config);
-      let resultHtml = '';
-      for(let a of response.data.value){
-        resultHtml +=`<option value='${a.fields.clientNumber}'>${a.fields.Title}</option>`;
-      };
-      $('#createMatterFormClientSelect').html(resultHtml);
 
-    } catch (error) {
-      console.log(error);
-    }
+    law.getListItems (this, '#createMatterFormClientSelect', 3, function( a ) { return `<option value='${a.fields.clientNumber}'>${a.fields.Title}</option>` });
+
   });
-
-
 
   $('#anyuanren-add').click(function() {
     law.addPeople('#employeeFormControlSelect2', 'anyuanren', '案源人');
