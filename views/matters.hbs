@@ -42,7 +42,7 @@
                   <div class="form-group col-md-6">
                   <label for="client-select-input">Client</label>
                     <div class="input-group">
-                      <select name="CategoryS"class="form-control" id="createMatterFormControlSelect1">
+                      <select name="CategoryS"class="form-control" id="createMatterFormClientSelect">
                       {{#each clientList}}
                         <option value='{{this.id}}'>{{this.fields.Title}}</option>
                       {{/each}}
@@ -289,41 +289,27 @@
     {{/if}}    
 
   </div>
+  <script src='../service/bootstrap-waitingfor.min.js'></script>
+  <script src="../service/service.js"></script>
 
   <script>
-    $('#createMatterFormControlSelect2').change(async function() {
-      const branchSelectValue = $(this).val();
-      const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-      let config = {headers: {Authorization: accessToken,}}
-      try {
-        const response = await axios.get(`http://localhost:4000/api/v2/departments?branchid='${branchSelectValue}'`, config);
 
-        let resultHtml = '';
-        for(let a of response.data.value){
-          resultHtml +=`<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>`;
-        };
-        $('#createMatterFormControlSelect3').html(resultHtml);
-      } catch (error) {
-        console.log(error);
-      }
-    });
-  $('#BranchFormControlSelect2').change(async function() {
-      const branchSelectValue = $(this).val();
-      const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-      let config = {headers: {Authorization: accessToken,}}
-      try {
-        const response = await axios.get(`http://localhost:4000/api/v2/departments?branchid='${branchSelectValue}'`, config);
-
-        let resultHtml = '';
-        for(let a of response.data.value){
-          resultHtml +=`<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>`;
-        };
-        $('#departmentFormControlSelect2').html(resultHtml);
-      } catch (error) {
-        console.log(error);
-      }
+  $('.nav-link').click( function (){
+    waitingDialog.show();
   });
+
+  $('#createMatterFormControlSelect2').change(function() {
+    law.getListItems (this, '#createMatterFormControlSelect3', function( a ) { return `<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>`})
+  });
+
+  $('#BranchFormControlSelect2').change( function () {
+    law.getListItems (this, '#departmentFormControlSelect2', function( a ) { return `<option value='${a.fields.deparmentid}'>${a.fields.Branch}-${a.fields.Title}</option>` })
+  });
+
+
+  //
   $('#departmentFormControlSelect2').change(async function() {
+      waitingDialog.show();
       const departmentSelectValue = $(this).val();
       const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       let config = {headers: {Authorization: accessToken,}}
@@ -335,120 +321,17 @@
           resultHtml +=`<option value='${a.fields.employeeid}'>${a.fields.Title}</option>`;
         };
         $('#employeeFormControlSelect2').html(resultHtml);
+        waitingDialog.hide();
       } catch (error) {
         console.log(error);
+        waitingDialog.hide();
       }
   });  
 
 
-  
-  $('#anyuanren-add').click(function() {
-    const anyuanrenSelValue = $('#employeeFormControlSelect2').val();
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">案源人</li>
-                  <li class="list-group-item">${anyuanrenSelValue}</li>`;
-    $('#anyuanren_list').html(resultHtml);
-    $('#anyuanren-delete').show();
-    $(this).hide();
-  });
-  $('#anyuanren-delete').click(function() {
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">案源人</li>
-                  <li class="list-group-item">Empty</li>`;
-    $('#anyuanren_list').html(resultHtml);
-    $('#anyuanren-add').show();
-    $(this).hide();
-  });
 
-  $('#zhuban-add').click(function() {
-    const zhubanSelValue = $('#employeeFormControlSelect2').val();
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">主办律师</li>
-                  <li class="list-group-item">${zhubanSelValue}</li>`;
-    $('#zhuban_list').html(resultHtml);
-    $('#zhuban-delete').show();
-    $(this).hide();
-  });
-  $('#zhuban-delete').click(function() {
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">主办律师</li>
-                  <li class="list-group-item">Empty</li>`;
-    $('#zhuban_list').html(resultHtml);
-    $('#zhuban-add').show();
-    $(this).hide();
-  });
 
-  $('#duban-add').click(function() {
-    const dubanSelValue = $('#employeeFormControlSelect2').val();
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">督办律师</li>
-                  <li class="list-group-item">${dubanSelValue}</li>`;
-    $('#duban_list').html(resultHtml);
-    $('#duban-delete').show();
-    $(this).hide();
-  });
-  $('#duban-delete').click(function() {
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">督办律师</li>
-                  <li class="list-group-item">Empty</li>`;
-    $('#duban_list').html(resultHtml);
-    $('#duban-add').show();
-    $(this).hide();
-  });
-
-  $('#xieban-add').click(function() {
-    const xiebanSelValue = $('#employeeFormControlSelect2').val();
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">协办律师</li>
-                  <li class="list-group-item">${xiebanSelValue}</li>`;
-    $('#xieban_list').html(resultHtml);
-    $('#xieban-delete').show();
-    $(this).hide();
-  });
-  $('#xieban-delete').click(function() {
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">协办律师</li>
-                  <li class="list-group-item">Empty</li>`;
-    $('#xieban_list').html(resultHtml);
-    $('#xieban-add').show();
-    $(this).hide();
-  });  
-
-  $('#zhuli-add').click(function() {
-    const zhuliSelValue = $('#employeeFormControlSelect2').val();
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">律师助理</li>
-                  <li class="list-group-item">${zhuliSelValue}</li>`;
-    $('#zhuli_list').html(resultHtml);
-    $('#zhuli-delete').show();
-    $(this).hide();
-  });
-  $('#zhuli-delete').click(function() {
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">律师助理</li>
-                  <li class="list-group-item">Empty</li>`;
-    $('#zhuli_list').html(resultHtml);
-    $('#zhuli-add').show();
-    $(this).hide();
-  }); 
-
-  $('#mishu-add').click(function() {
-    const mishuSelValue = $('#employeeFormControlSelect2').val();
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">业务秘书</li>
-                  <li class="list-group-item">${mishuSelValue}</li>`;
-    $('#mishu_list').html(resultHtml);
-    $('#mishu-delete').show();
-    $(this).hide();
-  });
-  $('#mishu-delete').click(function() {
-    let resultHtml = '';
-    resultHtml = `<li class="list-group-item">业务秘书</li>
-                  <li class="list-group-item">Empty</li>`;
-    $('#mishu_list').html(resultHtml);
-    $('#mishu-add').show();
-    $(this).hide();
-  }); 
+  //modal 
   $('#modal-save-button').click(async function() {
     let client = {};
     client.Title = $('#new-client-name-input').val();
@@ -458,20 +341,71 @@
     const data = client;
  
     const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)graph_access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-      let config = {headers: {Authorization: accessToken,}}
-      try {
-        const response = await axios.post(`http://localhost:4000/api/v2/clients`, data, config);
-        console.log('BBC');
-      } catch (error) {
-        console.log(error);
-      }
+    let config = {headers: {Authorization: accessToken,}}
+    try {
+      const response = await axios.post(`http://localhost:4000/api/v2/clients`, data, config);
+    } catch (error) {
+      console.log(error);
+    }
     //hiden the modal and clean the input fields
     $('#exampleModalCenter').modal('hide')
     $('#new-client-name-input').val('');
     $('#new-client-address-input').val('');
     $('#new-client-phone-input').val('');
     $('#new-client-zip-input').val('')
+    //update client select dropdown 
+    try {
+      const response = await axios.get(`http://localhost:4000/api/v2/clients`, config);
+      let resultHtml = '';
+      for(let a of response.data.value){
+        resultHtml +=`<option value='${a.fields.clientNumber}'>${a.fields.Title}</option>`;
+      };
+      $('#createMatterFormClientSelect').html(resultHtml);
+
+    } catch (error) {
+      console.log(error);
+    }
   });
+
+
+
+  $('#anyuanren-add').click(function() {
+    law.addPeople('#employeeFormControlSelect2', 'anyuanren', '案源人');
+  });
+  $('#zhuban-add').click(function() {
+    law.addPeople('#employeeFormControlSelect2', 'zhuban', '主办律师');
+  });
+  $('#duban-add').click(function() {
+    law.addPeople('#employeeFormControlSelect2', 'duban', '督办律师');
+  });
+  $('#xieban-add').click(function() {
+    law.addPeople('#employeeFormControlSelect2', 'xieban', '协办律师');
+  });
+  $('#zhuli-add').click(function() {
+    law.addPeople('#employeeFormControlSelect2', 'zhuli', '助理律师');
+  });
+  $('#mishu-add').click(function() {
+    law.addPeople('#employeeFormControlSelect2', 'mishu', '律师秘书');
+  });
+
+  $('#anyuanren-delete').click(function() {
+    law.delPeople('anyuanren', '案源人');
+  });
+  $('#zhuban-delete').click(function() {
+    law.delPeople('zhuban', '主办律师');
+  });
+  $('#duban-delete').click(function() {
+    law.delPeople('duban', '督办律师');
+  });
+  $('#xieban-delete').click(function() {
+    law.delPeople('xieban', '协办律师');
+  });  
+  $('#zhuli-delete').click(function() {
+    law.delPeople('zhuli', '助理律师');
+  }); 
+  $('#mishu-delete').click(function() {
+    law.delPeople('mishu', '律师秘书');
+  }); 
 
   </script>
 </div>

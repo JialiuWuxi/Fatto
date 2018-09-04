@@ -31,6 +31,10 @@ router.get('/createnew', async function (req, res, next) {
     res.redirect('/');
   }
 
+  // let matter = new Matters();
+  // matter.new();
+
+
   let config = {headers: { Authorization: accessToken,}};
 
   try {
@@ -47,5 +51,8 @@ router.get('/createnew', async function (req, res, next) {
     console.error(error);
   }
   res.render('matters', parms);
+
+
+
 });
 module.exports = router;
